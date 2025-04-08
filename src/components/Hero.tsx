@@ -44,18 +44,14 @@ const Hero = () => {
         
         <div className="order-1 md:order-2 flex justify-center md:flex-1">
           <div className="relative">
-            <div className="w-64 h-64 md:w-80 md:h-80 rounded-full">
+            <div className="w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-full border-4 border-tech-teal shadow-xl">
               <img 
                 src="/lovable-uploads/99c843a6-888f-43d1-aca1-29a74449d061.png" 
                 alt="Ahmad Fareed Khan" 
-                className="w-full h-full object-contain mix-blend-multiply"
-                style={{
-                  filter: "drop-shadow(0 0 10px rgba(13, 148, 136, 0.5))",
-                  backgroundColor: "transparent"
-                }}
+                className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-4 left-0 right-0 h-8 bg-gradient-to-t from-background to-transparent z-10"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-tech-blue/10 to-tech-teal/10"></div>
           </div>
         </div>
       </div>
