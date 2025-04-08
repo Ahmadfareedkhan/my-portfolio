@@ -1,0 +1,57 @@
+
+import { Button } from "@/components/ui/button";
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+
+const Hero = () => {
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <section className="min-h-[calc(100vh-4rem)] flex flex-col justify-center py-10">
+      <div className="animate-fade-in">
+        <p className="text-tech-teal font-medium mb-3">Hello, I'm</p>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+          Ahmad Fareed Khan
+        </h1>
+        <h2 className="text-2xl md:text-3xl font-semibold mb-6 gradient-text">
+          AI & Machine Learning Engineer
+        </h2>
+        <p className="text-lg max-w-2xl mb-8 text-gray-700 dark:text-gray-300">
+          I'm passionate about solving complex problems, building impactful AI applications, 
+          and continuously learning new skills to develop practical solutions that positively 
+          benefit users and society.
+        </p>
+        
+        <div className="flex flex-wrap gap-4 mb-12">
+          <Button onClick={scrollToContact} className="bg-tech-blue hover:bg-tech-blue/90">
+            Contact Me
+          </Button>
+          <Button variant="outline" className="gap-2" asChild>
+            <a href="https://github.com/Ahmadfareedkhan" target="_blank" rel="noopener noreferrer">
+              <Github size={18} /> GitHub
+            </a>
+          </Button>
+          <Button variant="outline" className="gap-2" asChild>
+            <a href="https://www.linkedin.com/in/ahmad-ml-engineer-ai-expert" target="_blank" rel="noopener noreferrer">
+              <Linkedin size={18} /> LinkedIn
+            </a>
+          </Button>
+        </div>
+      </div>
+      
+      <div className="mt-auto flex justify-center">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" })}
+          className="animate-bounce"
+        >
+          <ArrowDown />
+        </Button>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
