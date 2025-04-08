@@ -1,7 +1,6 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -42,16 +41,16 @@ const Hero = () => {
           </div>
         </div>
         
-        <div className="order-1 md:order-2 flex justify-center md:flex-1">
+        <div className="order-1 md:order-2 md:flex-1 flex justify-center">
           <div className="relative">
-            <div className="w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-full border-4 border-tech-teal shadow-xl">
+            <div className="max-w-[320px] md:max-w-[380px] h-auto">
               <img 
-                src="/lovable-uploads/99c843a6-888f-43d1-aca1-29a74449d061.png" 
+                src="/lovable-uploads/8eed2f86-93c5-4246-be01-3ad8eb5ef872.png" 
                 alt="Ahmad Fareed Khan" 
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-contain drop-shadow-lg"
               />
             </div>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-tech-blue/10 to-tech-teal/10"></div>
+            <div className="absolute -bottom-6 -left-6 -right-6 h-20 bg-gradient-to-t from-background to-transparent z-[-1]"></div>
           </div>
         </div>
       </div>
