@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Brain, Code, FileText, Github, Graduation, Home, Linkedin, Mail, Menu, User } from "lucide-react";
+import { Brain, Code, FileText, Github, GraduationCap, Home, Linkedin, Mail, Menu, User } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
@@ -29,7 +29,7 @@ const Navbar = () => {
     { name: "Experience", icon: <Code size={18} />, action: () => scrollToSection("experience") },
     { name: "Projects", icon: <Brain size={18} />, action: () => scrollToSection("projects") },
     { name: "Skills", icon: <FileText size={18} />, action: () => scrollToSection("skills") },
-    { name: "Education", icon: <Graduation size={18} />, action: () => scrollToSection("education") },
+    { name: "Education", icon: <GraduationCap size={18} />, action: () => scrollToSection("education") },
     { name: "Contact", icon: <User size={18} />, action: () => scrollToSection("contact") }
   ];
 

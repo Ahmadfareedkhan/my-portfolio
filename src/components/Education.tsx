@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Certificate } from "lucide-react";
+import { BookOpen, Award } from "lucide-react";
 
 const Education = () => {
   const education = [
@@ -18,19 +18,19 @@ const Education = () => {
       name: "DeepLearning Specialization",
       issuer: "Coursera, DeepLearning.ai, Stanford Online",
       year: "2025",
-      icon: <Certificate className="h-6 w-6" />
+      icon: <Award className="h-6 w-6" />
     },
     {
       name: "Machine Learning Specialization",
       issuer: "Coursera, DeepLearning.ai, Stanford Online",
       year: "2024",
-      icon: <Certificate className="h-6 w-6" />
+      icon: <Award className="h-6 w-6" />
     },
     {
       name: "Introduction to Generative AI by Google",
       issuer: "Google",
       year: "2024",
-      icon: <Certificate className="h-6 w-6" />
+      icon: <Award className="h-6 w-6" />
     }
   ];
 
