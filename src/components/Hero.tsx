@@ -20,11 +20,11 @@ const Hero = () => {
             AI & Machine Learning Engineer
           </h2>
           <p className="text-lg max-w-2xl mb-8 text-gray-700 dark:text-gray-300">
-            I'm passionate about solving complex problems, building impactful AI applications, 
-            and continuously learning new skills to develop practical solutions that positively 
+            I'm passionate about solving complex problems, building impactful AI applications,
+            and continuously learning new skills to develop practical solutions that positively
             benefit users and society.
           </p>
-          
+
           <div className="flex flex-wrap gap-4 mb-12">
             <Button onClick={scrollToContact} className="bg-tech-blue hover:bg-tech-blue/90">
               Contact Me
@@ -41,21 +41,21 @@ const Hero = () => {
             </Button>
           </div>
         </div>
-        
+
         <div className="order-1 md:order-2 flex justify-center md:flex-1">
           <div className="relative">
             <div className="w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-full border-4 border-tech-teal shadow-xl">
-              <img 
-                src="/lovable-uploads/99c843a6-888f-43d1-aca1-29a74449d061.png" 
-                alt="Ahmad Fareed Khan" 
-                className="w-full h-full object-cover"
+              <img
+                src="/lovable-uploads/profile.jpeg"
+                alt="Ahmad Fareed Khan"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-tech-blue/10 to-tech-teal/10"></div>
           </div>
         </div>
       </div>
-      
+
       <div className="mt-auto flex justify-center">
         <Button
           variant="ghost"
