@@ -1,7 +1,8 @@
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Code, Database, Lock, MessageSquare, Play, Terminal, Video } from "lucide-react";
+import { Brain, Database, ExternalLink, Github, Lock, MessageSquare, Terminal, Video } from "lucide-react";
 
 const Projects = () => {
   const projects = [
@@ -17,7 +18,9 @@ const Projects = () => {
         "Integrated with multiple external services including Google Calendar, Gmail, Fireflies.ai",
         "Deployed a Slack interface allowing natural language interaction",
         "Built intelligent workflows that reason across different data sources"
-      ]
+      ],
+      link: "https://www.thesecondbrain.io/",
+      linkType: "demo"
     },
     {
       title: "Stock Exchange Data Platform",
@@ -31,7 +34,9 @@ const Projects = () => {
         "Created an automated scheduling system with cron-based execution",
         "Incorporated data validation and gap detection algorithms",
         "Developed an agentic framework for future expansion"
-      ]
+      ],
+      link: "https://github.com/TauricResearch/TradingAgents",
+      linkType: "github"
     },
     {
       title: "Thumbly",
@@ -43,7 +48,9 @@ const Projects = () => {
         "Used computer vision to analyze frames with vision models",
         "Added Deepgram STT for analyzing transcription"
       ],
-      company: "Octaloop Technologies"
+      company: "Octaloop Technologies",
+      link: "https://thumbly.ai/",
+      linkType: "demo"
     },
     {
       title: "Anti-Spoofing Security System",
@@ -55,10 +62,12 @@ const Projects = () => {
         "Designed to distinguish between genuine faces and fraudulent attempts",
         "Integrated with Flutter Mobile Application for Attendance System"
       ],
-      company: "DevFusion"
+      company: "DevFusion",
+      link: "https://github.com/Ahmadfareedkhan/Anti-Spoofing-Face-Recogntion-System",
+      linkType: "github"
     },
     {
-      title: "Apollo",
+      title: "AI Lawyer",
       description: "AI-powered legal assistant platform",
       icon: <MessageSquare className="h-8 w-8 text-tech-blue" />,
       tags: ["OpenAI", "Voice Interaction", "Semantic Search", "UK Law"],
@@ -67,10 +76,12 @@ const Projects = () => {
         "Designed end-to-end document analysis and contextual search features",
         "Enabling natural voice queries and dynamic conversation management"
       ],
-      company: "Octaloop Technologies"
+      company: "Octaloop Technologies",
+      link: "https://ailawyer.pro/",
+      linkType: "demo"
     },
     {
-      title: "AI Nutrition Chatbot",
+      title: "Nutrition AI",
       description: "Voice-enabled nutrition assistant",
       icon: <Terminal className="h-8 w-8 text-tech-blue" />,
       tags: ["OpenAI GPT", "Gradio", "Hugging Face", "STT", "TTS"],
@@ -79,18 +90,20 @@ const Projects = () => {
         "Added STT and TTS models for voice interaction",
         "Used prompt engineering to build a relevant chatbot"
       ],
-      type: "Opensource Contribution"
+      type: "Opensource Contribution",
+      link: "https://www.nutritionai.app/",
+      linkType: "demo"
     }
   ];
 
   return (
     <section id="projects" className="py-16">
       <h2 className="section-heading">Projects</h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.map((project, index) => (
-          <Card 
-            key={index} 
+          <Card
+            key={index}
             className={`card-hover animate-fade-in`}
             style={{ animationDelay: `${index * 0.15}s` }}
           >
@@ -103,6 +116,22 @@ const Projects = () => {
                   <CardTitle className="text-xl">{project.title}</CardTitle>
                   <CardDescription className="mt-1">{project.description}</CardDescription>
                 </div>
+                {project.link && (
+                  <Button variant="ghost" size="icon" asChild className="ml-2 shrink-0">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={project.linkType === "github" ? "View on GitHub" : "View live demo"}
+                    >
+                      {project.linkType === "github" ? (
+                        <Github className="h-5 w-5" />
+                      ) : (
+                        <ExternalLink className="h-5 w-5" />
+                      )}
+                    </a>
+                  </Button>
+                )}
               </div>
               {(project.company || project.type) && (
                 <div className="mt-2">
@@ -123,9 +152,9 @@ const Projects = () => {
             </CardContent>
             <CardFooter className="flex flex-wrap gap-2">
               {project.tags.map((tag, i) => (
-                <Badge 
-                  key={i} 
-                  variant="secondary" 
+                <Badge
+                  key={i}
+                  variant="secondary"
                   className="text-xs bg-gray-100 dark:bg-gray-800"
                 >
                   {tag}
