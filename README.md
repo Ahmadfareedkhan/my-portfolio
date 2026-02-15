@@ -4,6 +4,12 @@
 
 **URL**: https://lovable.dev/projects/c5fc93ae-1ede-40f4-83ac-6b947550053b
 
+## AI context memory
+
+To preserve context across AI sessions, see:
+
+- `docs/AI_CONTEXT.md`
+
 ## How can I edit this code?
 
 There are several ways of editing your application.

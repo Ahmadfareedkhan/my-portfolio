@@ -48,33 +48,33 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 224 54% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 224 50% 11%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 224 50% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217.2 91.2% 59.8%;
+    --primary: 217.2 91.2% 62%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 167 94% 45%;
+    --secondary: 178 82% 38%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 221 31% 18%;
+    --muted-foreground: 215 18% 74%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 221 31% 18%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --border: 217 32% 24%;
+    --input: 217 32% 24%;
+    --ring: 178 82% 38%;
     
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -95,6 +95,7 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    @apply antialiased;
   }
 
   html {
@@ -108,11 +109,11 @@
   }
   
   .section-heading {
-    @apply text-3xl md:text-4xl font-bold mb-6 gradient-text;
+    @apply text-3xl md:text-4xl font-bold mb-5 gradient-text tracking-tight;
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-border/80;
   }
   
   .timeline-dot::before {
@@ -120,12 +121,4 @@
     @apply absolute w-4 h-4 bg-tech-teal rounded-full -left-[22px] top-1;
   }
   
-  .skill-bar {
-    height: 8px;
-    @apply bg-gray-200 rounded-full overflow-hidden;
-  }
-  
-  .skill-progress {
-    @apply h-full bg-gradient-to-r from-tech-blue to-tech-teal rounded-full;
-  }
 }

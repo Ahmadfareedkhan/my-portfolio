@@ -10,8 +10,8 @@ const Experience = () => {
       period: "June 2025 - Present",
       location: "Lahore, Pakistan - Hybrid",
       achievements: [
-        "Currently developing and enhancing transformer-based model architectures for Pearson (leading global education company) to build a job posting classification system that accurately maps job posts to relevant categories.",
-        "Developed a fully automated tariff classification system for PwC (Big Four accounting firm) using an AI agentic approach with LangChain and OpenAI. The solution reduced manual effort by ~50%, improving efficiency and cutting costs."
+        "Challenge: job postings were difficult to classify consistently at scale. Built: transformer-based classification pipelines for Pearson job taxonomy mapping. Impact: improved categorization quality and reduced manual review overhead.",
+        "Challenge: tariff classification was slow and human-dependent for PwC workflows. Built: an AI agentic system using LangChain + OpenAI for automated classification. Impact: reduced manual effort by ~50% and accelerated processing."
       ]
     },
     {
@@ -20,10 +20,9 @@ const Experience = () => {
       period: "April 2025 - May 2025",
       location: "Kelowna, Canada - Remote",
       achievements: [
-        "Contributed to the development of an advanced Code Assistant Agent designed to enhance developer productivity through intelligent codebase analysis.",
-        "Utilized LangChain Expression Language (LCEL) to construct modular and maintainable chains, facilitating seamless integration of various components within the agent's architecture.",
-        "Integrated the BM25Retriever to efficiently fetch relevant code snippets and documentation, ensuring accurate context retrieval for user queries.",
-        "Employed RAG techniques to combine retrieved information with language model capabilities, delivering precise and context-aware code suggestions."
+        "Challenge: developers needed faster, context-aware coding support. Built: a code assistant agent for repository-level analysis and guided suggestions. Impact: improved developer productivity and response relevance.",
+        "Challenge: brittle chain orchestration made extensions hard. Built: modular LCEL pipelines for maintainable agent orchestration. Impact: easier scaling and cleaner integration of new capabilities.",
+        "Challenge: retrieval quality was limiting answer accuracy. Built: BM25 + RAG retrieval stack for contextual snippet and documentation fetching. Impact: more precise code assistance and fewer irrelevant responses."
       ]
     },
     {
@@ -32,9 +31,9 @@ const Experience = () => {
       period: "June 2024 - March 2025",
       location: "Lahore, Pakistan - On-site",
       achievements: [
-        "Developed Thumbly, an AI-powered video thumbnail generator service that automatically creates high-quality, content-relevant thumbnails for videos with minimal user input.",
-        "Developed \"AI Lawyer,\" an advanced legal assistant for UK law using OpenAI technologies—built a full-stack application featuring real-time voice interaction capabilities, an interactive chatbot with natural conversation flow, an intelligent document processing system with semantic search functionality, and secure conversation management with automatic summarization.",
-        "Contributed to AI solutions generating YouTube and Twitch highlights for gaming streams, decreasing the cost of servers by 30%, reducing the computational resources without losing efficiency."
+        "Challenge: creators needed faster thumbnail production. Built: Thumbly, an AI-driven thumbnail generation service with low-friction user input. Impact: significantly reduced creative turnaround time.",
+        "Challenge: legal teams needed quicker access to reliable legal context. Built: AI Lawyer with voice interaction, semantic search, and document intelligence for UK law. Impact: improved answer speed and legal workflow efficiency.",
+        "Challenge: media highlight generation was infrastructure-heavy. Built: AI pipelines for YouTube/Twitch highlight extraction and optimization. Impact: reduced server cost by ~30% without losing output quality."
       ]
     },
     {
@@ -43,8 +42,8 @@ const Experience = () => {
       period: "May 2024 - March 2025",
       location: "Plano, Texas, United States - Remote",
       achievements: [
-        "Developed Z360: an AI-powered SaaS platform that enhances business operations with integrated solutions such as live chat, centralized calling, and voice agents utilizing OpenAI.",
-        "Leveraged the Pipecat framework to create a more accurate conversational agent, reducing operational costs by 50-60%."
+        "Challenge: fragmented communication tools hurt operational efficiency. Built: Z360, an AI-enabled SaaS platform combining chat, calling, and voice agents. Impact: improved workflow centralization for business teams.",
+        "Challenge: conversational agents needed better quality at lower cost. Built: Pipecat-based improvements for voice agent accuracy and orchestration. Impact: reduced operational costs by 50-60%."
       ]
     },
     {
@@ -53,8 +52,8 @@ const Experience = () => {
       period: "December 2023 - May 2024",
       location: "Lahore, Pakistan",
       achievements: [
-        "Developed AI-powered body size measurement and personalized footwear sizing solution using OpenCV and MediaPipe, enhancing fashion and e-commerce experiences.",
-        "Created a chatbot to automate proposal generation using NLP, reducing costs and improving client satisfaction."
+        "Challenge: e-commerce sizing mismatch increased returns and friction. Built: AI body measurement and footwear sizing with OpenCV + MediaPipe. Impact: improved sizing confidence for end users.",
+        "Challenge: proposal writing consumed team bandwidth. Built: NLP chatbot for proposal generation automation. Impact: reduced preparation cost and improved client response quality."
       ]
     },
     {
@@ -63,8 +62,8 @@ const Experience = () => {
       period: "August 2023 - December 2023",
       location: "Lahore, Pakistan",
       achievements: [
-        "Worked as a lead on a Anti-Spoofing Face Recognition Attendance System using OpenCV, YOLO v8 and trained model using CUDA.",
-        "Developed a chatbot for cosmetic Business leveraging natural language processing (NLP) techniques and TensorFlow, resulting in a 30% increase in customer engagement and a 25% improvement in response accuracy."
+        "Challenge: attendance systems were vulnerable to spoofing attacks. Built: anti-spoofing face recognition attendance solution using OpenCV, YOLOv8, and CUDA acceleration. Impact: stronger verification reliability.",
+        "Challenge: customer support needed faster, smarter responses. Built: TensorFlow NLP chatbot for a cosmetics business. Impact: increased engagement by 30% and improved response accuracy by 25%."
       ]
     }
   ];
@@ -72,6 +71,10 @@ const Experience = () => {
   return (
     <section id="experience" className="py-16">
       <h2 className="section-heading">Professional Experience</h2>
+      <p className="mb-8 text-sm md:text-base text-muted-foreground max-w-3xl">
+        3+ years delivering AI systems across product, automation, and operations. Each role focuses on
+        solving a business problem, building production-ready solutions, and driving measurable impact.
+      </p>
 
       <div className="relative pl-6 border-l-2 border-tech-teal/30">
         {experiences.map((exp, index) => (

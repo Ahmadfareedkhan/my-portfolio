@@ -8,7 +8,6 @@ const Education = () => {
       degree: "Bachelor of Computer Science",
       institution: "Superior University Lahore",
       location: "Lahore, Pakistan",
-      year: "2024",
       icon: <BookOpen className="h-6 w-6" />
     }
   ];
@@ -53,7 +52,7 @@ const Education = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">{item.location} • {item.year}</p>
+                <p className="text-sm text-muted-foreground">{item.location}</p>
               </CardContent>
             </Card>
           ))}

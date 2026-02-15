@@ -4,6 +4,9 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const scrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  };
   
   return (
     <footer className="py-10 border-t">
@@ -12,11 +15,18 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <h3 className="font-bold text-lg gradient-text">Ahmad Fareed Khan</h3>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              AI & Machine Learning Engineer
+              AI Engineer helping clients ship production-ready AI solutions
             </p>
           </div>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap justify-center">
+            <Button
+              variant="secondary"
+              className="bg-tech-teal/90 hover:bg-tech-teal text-white"
+              onClick={scrollToContact}
+            >
+              Start Project
+            </Button>
             <Button variant="ghost" size="icon" asChild>
               <a 
                 href="https://github.com/Ahmadfareedkhan"
@@ -50,7 +60,6 @@ const Footer = () => {
         
         <div className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
           <p>&copy; {currentYear} Ahmad Fareed Khan. All rights reserved.</p>
-          <p className="mt-1">Built with React, TypeScript and Tailwind CSS</p>
         </div>
       </div>
     </footer>

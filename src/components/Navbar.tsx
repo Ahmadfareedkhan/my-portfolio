@@ -7,6 +7,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +38,7 @@ const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
+          ? "bg-background/85 backdrop-blur-md border-b border-border/70 shadow-sm"
           : "bg-transparent"
         }`}
     >
@@ -62,6 +63,13 @@ const Navbar = () => {
 
         {/* Social Links & Theme Toggle - Desktop */}
         <div className="hidden md:flex items-center gap-2">
+          <Button
+            variant="secondary"
+            onClick={() => scrollToSection("contact")}
+            className="bg-tech-teal/90 hover:bg-tech-teal text-white"
+          >
+            Start Project
+          </Button>
           <Button variant="ghost" size="icon" asChild>
             <a
               href="https://github.com/Ahmadfareedkhan"
@@ -96,7 +104,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         <div className="flex md:hidden items-center gap-2">
           <ThemeToggle />
-          <Sheet>
+          <Sheet open={isMobileOpen} onOpenChange={setIsMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu />
@@ -110,7 +118,7 @@ const Navbar = () => {
                     variant="ghost"
                     onClick={() => {
                       item.action();
-                      document.body.click(); // Close the sheet
+                      setIsMobileOpen(false);
                     }}
                     className="justify-start gap-2"
                   >
@@ -118,6 +126,16 @@ const Navbar = () => {
                     {item.name}
                   </Button>
                 ))}
+
+                <Button
+                  className="mt-2 bg-tech-teal hover:bg-tech-teal/90"
+                  onClick={() => {
+                    scrollToSection("contact");
+                    setIsMobileOpen(false);
+                  }}
+                >
+                  Start Project
+                </Button>
 
                 <div className="pt-4 mt-4 border-t flex gap-2">
                   <Button variant="outline" size="icon" asChild>

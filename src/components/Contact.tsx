@@ -8,6 +8,11 @@ import { useToast } from "@/hooks/use-toast";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
 import { useState } from "react";
 
+const CONTACT_EMAIL = "ahmadkhanfareed388@gmail.com";
+const FORM_ENDPOINT =
+  import.meta.env.VITE_CONTACT_FORM_ENDPOINT ||
+  `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -15,25 +20,55 @@ const Contact = () => {
     email: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [didFailSubmit, setDidFailSubmit] = useState(false);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real implementation, you would send this data to a server
-    console.log("Form submitted:", formData);
-    
-    // Show success notification
-    toast({
-      title: "Message sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
-    
-    // Reset form
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+    setDidFailSubmit(false);
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `Portfolio Inquiry from ${formData.name}`,
+          _captcha: "false"
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Submission request failed");
+      }
+
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I will get back to you shortly."
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
+      setDidFailSubmit(true);
+      toast({
+        title: "Submission failed",
+        description: "Please try again or use direct email below.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -57,10 +92,10 @@ const Contact = () => {
                 <div>
                   <p className="text-sm text-white/70">Email</p>
                   <a 
-                    href="mailto:ahmadkhanfareed388@gmail.com" 
+                    href={`mailto:${CONTACT_EMAIL}`} 
                     className="hover:underline hover:text-white/90"
                   >
-                    ahmadkhanfareed388@gmail.com
+                    {CONTACT_EMAIL}
                   </a>
                 </div>
               </div>
@@ -122,7 +157,7 @@ const Contact = () => {
             <CardHeader>
               <CardTitle>Send a Message</CardTitle>
               <CardDescription>
-                I'll get back to you as soon as possible
+                Use the form or send a direct email if submission fails.
               </CardDescription>
             </CardHeader>
             <form onSubmit={handleSubmit}>
@@ -165,10 +200,26 @@ const Contact = () => {
                   />
                 </div>
               </CardContent>
-              <CardFooter>
-                <Button type="submit" className="bg-tech-blue hover:bg-tech-blue/90 w-full">
-                  Send Message
+              <CardFooter className="flex-col items-stretch gap-3">
+                <Button
+                  type="submit"
+                  className="bg-tech-blue hover:bg-tech-blue/90 w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
+                {didFailSubmit && (
+                  <Button variant="outline" type="button" asChild className="w-full">
+                    <a
+                      href={`mailto:${CONTACT_EMAIL}?subject=Portfolio%20Inquiry&body=Hi%20Ahmad%2C%0A%0AI%20would%20like%20to%20discuss%20a%20project.`}
+                    >
+                      Send via Email Instead
+                    </a>
+                  </Button>
+                )}
+                <p className="text-xs text-muted-foreground text-center">
+                  Form delivery is handled via a free hosted service.
+                </p>
               </CardFooter>
             </form>
           </Card>

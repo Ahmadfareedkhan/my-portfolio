@@ -1,64 +1,111 @@
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Skills = () => {
-  const skillCategories = [
+  const skillGroups = [
     {
-      category: "technical",
-      title: "Technical Skills",
+      title: "Core Strengths",
+      description: "Technologies I use most often in paid client delivery.",
       skills: [
-        { name: "Python", proficiency: 95 },
-        { name: "PyTorch", proficiency: 90 },
-        { name: "TensorFlow", proficiency: 85 },
-        { name: "OpenCV", proficiency: 90 },
-        { name: "Computer Vision", proficiency: 85 },
-        { name: "NLP", proficiency: 88 },
-        { name: "LLMs", proficiency: 92 },
-        { name: "RAG", proficiency: 90 },
-        { name: "MLOps", proficiency: 80 },
-        { name: "CUDA", proficiency: 85 }
+        {
+          name: "LLM Applications (RAG, Agents)",
+          proficiency: "Expert",
+          proof: "Built multi-agent workflows and retrieval systems for client products."
+        },
+        {
+          name: "Python & AI Backends",
+          proficiency: "Expert",
+          proof: "Primary language for production AI services, APIs, and automations."
+        },
+        {
+          name: "NLP & Semantic Retrieval",
+          proficiency: "Advanced",
+          proof: "Delivered context-aware assistants and domain-specific search features."
+        },
+        {
+          name: "Computer Vision",
+          proficiency: "Advanced",
+          proof: "Shipped CV solutions for media automation and anti-spoofing workflows."
+        }
       ]
     },
     {
-      category: "frameworks",
       title: "Frameworks & Tools",
+      description: "Stack used to move from prototype to reliable user-facing workflows.",
       skills: [
-        { name: "LangChain", proficiency: 92 },
-        { name: "LangGraph", proficiency: 88 },
-        { name: "CrewAI", proficiency: 85 },
-        { name: "Autogen", proficiency: 83 },
-        { name: "Flask", proficiency: 80 },
-        { name: "FastAPI", proficiency: 85 },
-        { name: "Django", proficiency: 75 },
-        { name: "Gradio", proficiency: 90 },
-        { name: "Streamlit", proficiency: 92 },
-        { name: "Selenium", proficiency: 85 },
-        { name: "Beautiful Soup", proficiency: 88 }
+        {
+          name: "LangChain / LCEL / LangGraph",
+          proficiency: "Expert",
+          proof: "Designed maintainable orchestration chains and task-specialized agents."
+        },
+        {
+          name: "FastAPI / Flask / Streamlit",
+          proficiency: "Advanced",
+          proof: "Built APIs and dashboards for rapid deployment and stakeholder testing."
+        },
+        {
+          name: "Selenium / Data Extraction",
+          proficiency: "Advanced",
+          proof: "Implemented scraping + scheduling + validation for data platforms."
+        },
+        {
+          name: "OpenAI Ecosystem",
+          proficiency: "Advanced",
+          proof: "Integrated completion, voice, and retrieval capabilities in production flows."
+        }
       ]
     },
     {
-      category: "cloud",
-      title: "Cloud & Infrastructure",
+      title: "Cloud & Delivery",
+      description: "Infrastructure and data foundations to keep systems stable in production.",
       skills: [
-        { name: "AWS", proficiency: 82 },
-        { name: "Azure", proficiency: 80 },
-        { name: "GCP", proficiency: 78 },
-        { name: "PostgreSQL", proficiency: 85 },
-        { name: "MongoDB", proficiency: 80 },
-        { name: "Git/GitHub", proficiency: 90 },
-        { name: "Postman", proficiency: 85 }
+        {
+          name: "PostgreSQL / SQLite / Supabase",
+          proficiency: "Advanced",
+          proof: "Designed dual-database and vector-enabled data models for AI apps."
+        },
+        {
+          name: "AWS / Azure / GCP",
+          proficiency: "Working Proficiency",
+          proof: "Deploy and maintain cloud-hosted AI services for client needs."
+        },
+        {
+          name: "MLOps & Optimization",
+          proficiency: "Advanced",
+          proof: "Improved cost-efficiency and throughput across AI media pipelines."
+        },
+        {
+          name: "Git, CI Workflows, QA",
+          proficiency: "Advanced",
+          proof: "Versioned delivery with reproducible releases and collaboration standards."
+        }
       ]
     },
     {
-      category: "soft",
-      title: "Soft Skills",
+      title: "Client Collaboration",
+      description: "How I work with teams to reduce delivery risk and increase clarity.",
       skills: [
-        { name: "Leadership", proficiency: 90 },
-        { name: "Teamwork", proficiency: 95 },
-        { name: "Problem Solving", proficiency: 92 },
-        { name: "Effective Communication", proficiency: 88 },
-        { name: "OOP", proficiency: 90 }
+        {
+          name: "Requirements to Execution",
+          proficiency: "Expert",
+          proof: "Translate vague business requirements into practical technical milestones."
+        },
+        {
+          name: "Stakeholder Communication",
+          proficiency: "Advanced",
+          proof: "Provide concise updates, tradeoffs, and clear next steps."
+        },
+        {
+          name: "Problem Solving Under Constraints",
+          proficiency: "Expert",
+          proof: "Balance speed, quality, and cost for deadline-sensitive projects."
+        },
+        {
+          name: "Team Collaboration",
+          proficiency: "Advanced",
+          proof: "Work smoothly with product, engineering, and non-technical stakeholders."
+        }
       ]
     }
   ];
@@ -66,45 +113,41 @@ const Skills = () => {
   return (
     <section id="skills" className="py-16">
       <h2 className="section-heading">Skills & Expertise</h2>
-      
-      <Card>
-        <CardContent className="p-6">
-          <Tabs defaultValue="technical" className="w-full">
-            <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-6">
-              {skillCategories.map((cat) => (
-                <TabsTrigger key={cat.category} value={cat.category}>
-                  {cat.title}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            
-            {skillCategories.map((category) => (
-              <TabsContent key={category.category} value={category.category} className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
-                  {category.skills.map((skill, index) => (
-                    <div 
-                      key={index} 
-                      className="animate-fade-in" 
-                      style={{ animationDelay: `${index * 0.05}s` }}
+      <p className="mb-8 text-sm md:text-base text-muted-foreground max-w-3xl">
+        Skill labels reflect real delivery depth: <strong>Expert</strong>, <strong>Advanced</strong>, and
+        <strong> Working Proficiency</strong>. I prioritize business outcomes over inflated self-ratings.
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {skillGroups.map((group, groupIndex) => (
+          <Card
+            key={group.title}
+            className="card-hover animate-fade-in"
+            style={{ animationDelay: `${groupIndex * 0.1}s` }}
+          >
+            <CardHeader>
+              <CardTitle>{group.title}</CardTitle>
+              <CardDescription>{group.description}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {group.skills.map((skill) => (
+                <div key={skill.name} className="rounded-md border border-border/70 bg-muted/20 p-4">
+                  <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-semibold text-sm md:text-base">{skill.name}</h3>
+                    <Badge
+                      variant={skill.proficiency === "Expert" ? "default" : "secondary"}
+                      className={skill.proficiency === "Expert" ? "bg-tech-teal text-white hover:bg-tech-teal/90" : ""}
                     >
-                      <div className="flex justify-between mb-2">
-                        <span className="font-medium">{skill.name}</span>
-                        <span className="text-sm text-gray-500">{skill.proficiency}%</span>
-                      </div>
-                      <div className="skill-bar">
-                        <div 
-                          className="skill-progress transition-all duration-1000 ease-out" 
-                          style={{ width: `${skill.proficiency}%` }} 
-                        />
-                      </div>
-                    </div>
-                  ))}
+                      {skill.proficiency}
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">{skill.proof}</p>
                 </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </CardContent>
-      </Card>
+              ))}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </section>
   );
 };

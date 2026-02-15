@@ -10,10 +10,10 @@ import Skills from "@/components/Skills";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100 dark:from-[#050a18] dark:via-[#0b1630] dark:to-[#13203a]">
       <Navbar />
       
-      <main className="container mx-auto px-6 pt-24">
+      <main className="container mx-auto px-6 pt-24 pb-4">
         <Hero />
         <Experience />
         <Projects />
