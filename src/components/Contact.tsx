@@ -217,9 +217,6 @@ const Contact = () => {
                     </a>
                   </Button>
                 )}
-                <p className="text-xs text-muted-foreground text-center">
-                  Form delivery is handled via a free hosted service.
-                </p>
               </CardFooter>
             </form>
           </Card>
