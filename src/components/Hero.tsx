@@ -24,12 +24,12 @@ const Hero = () => {
           </h2>
           <p className="text-lg max-w-2xl mb-6 text-gray-700 dark:text-gray-300 leading-relaxed">
             I help startups and teams turn AI ideas into production-ready systems that reduce manual effort,
-            improve response quality, and ship faster. With 3+ years of applied AI delivery, I build
+            improve response quality, and ship faster. With 5+ years of applied AI delivery, I build
             reliable solutions across LLM workflows, intelligent automation, and data-driven products.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
             <div className="rounded-md border border-border/70 bg-card/80 p-3">
-              <p className="text-lg font-semibold text-tech-teal">3+ Years</p>
+              <p className="text-lg font-semibold text-tech-teal">5+ Years</p>
               <p className="text-xs text-muted-foreground">Applied AI delivery experience</p>
             </div>
             <div className="rounded-md border border-border/70 bg-card/80 p-3">

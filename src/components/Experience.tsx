@@ -72,7 +72,7 @@ const Experience = () => {
     <section id="experience" className="py-16">
       <h2 className="section-heading">Professional Experience</h2>
       <p className="mb-8 text-sm md:text-base text-muted-foreground max-w-3xl">
-        3+ years delivering AI systems across product, automation, and operations. Each role focuses on
+        5+ years delivering AI systems across product, automation, and operations. Each role focuses on
         solving a business problem, building production-ready solutions, and driving measurable impact.
       </p>
 
