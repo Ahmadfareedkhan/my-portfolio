@@ -23,7 +23,12 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
-      "@typescript-eslint/no-unused-vars": "off",
+      // Kept on (as a warning): switching this off previously hid a dead
+      // lucide-react import in Hero.tsx. Underscore-prefixed args are exempt.
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
     },
   }
 );

@@ -12,6 +12,23 @@ const CONTACT_EMAIL = "ahmadkhanfareed388@gmail.com";
 const FORM_ENDPOINT =
   import.meta.env.VITE_CONTACT_FORM_ENDPOINT ||
   `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+const SUBMIT_TIMEOUT_MS = 15_000;
+
+// Keeps the visitor's draft when delivery fails, so clicking the fallback
+// button opens a prefilled email instead of discarding what they wrote.
+const buildMailtoHref = (name: string, message: string) => {
+  const body = [
+    "Hi Ahmad,",
+    "",
+    message || "I would like to discuss a project.",
+    "",
+    name ? `- ${name}` : ""
+  ].join("\n");
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+    name ? `Portfolio Inquiry from ${name}` : "Portfolio Inquiry"
+  )}&body=${encodeURIComponent(body)}`;
+};
 
 const Contact = () => {
   const { toast } = useToast();
@@ -22,6 +39,8 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [didFailSubmit, setDidFailSubmit] = useState(false);
+  // Honeypot: real users never see or fill this, bots usually do.
+  const [botField, setBotField] = useState("");
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -32,6 +51,12 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setDidFailSubmit(false);
+
+    // Silently drop honeypot hits: no toast, no request, no feedback to tune against.
+    if (botField) {
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch(FORM_ENDPOINT, {
@@ -45,12 +70,26 @@ const Contact = () => {
           email: formData.email,
           message: formData.message,
           _subject: `Portfolio Inquiry from ${formData.name}`,
-          _captcha: "false"
-        })
+          // Must stay "false": the /ajax/ endpoint has no page on which to
+          // render a captcha, so enabling it can reject valid submissions.
+          // Spam is handled by the _honey honeypot field below instead.
+          _captcha: "false",
+          _honey: botField
+        }),
+        signal: AbortSignal.timeout(SUBMIT_TIMEOUT_MS)
       });
 
       if (!response.ok) {
-        throw new Error("Submission request failed");
+        throw new Error(`Submission request failed with status ${response.status}`);
+      }
+
+      // A 200 does not mean delivered. FormSubmit answers 200 with
+      // { success: "false" } for non-delivery cases - most importantly before
+      // the recipient address has been activated - so reporting success from
+      // response.ok alone would tell visitors their message arrived when it did not.
+      const result = await response.json().catch(() => null);
+      if (result && String(result.success) !== "true") {
+        throw new Error(result.message || "Form service rejected the submission");
       }
 
       toast({
@@ -168,6 +207,7 @@ const Contact = () => {
                     id="name"
                     name="name"
                     placeholder="Your name"
+                    maxLength={120}
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -181,6 +221,7 @@ const Contact = () => {
                     name="email"
                     type="email"
                     placeholder="Your email address"
+                    maxLength={200}
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -194,25 +235,37 @@ const Contact = () => {
                     name="message"
                     placeholder="How can I help you?"
                     rows={5}
+                    maxLength={5000}
                     value={formData.message}
                     onChange={handleChange}
                     required
+                  />
+                </div>
+
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="_honey">Do not fill this field</label>
+                  <input
+                    id="_honey"
+                    name="_honey"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={botField}
+                    onChange={(e) => setBotField(e.target.value)}
                   />
                 </div>
               </CardContent>
               <CardFooter className="flex-col items-stretch gap-3">
                 <Button
                   type="submit"
-                  className="bg-tech-blue hover:bg-tech-blue/90 w-full"
+                  className="bg-tech-blue hover:bg-tech-blue/90 text-white w-full"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
                 {didFailSubmit && (
                   <Button variant="outline" type="button" asChild className="w-full">
-                    <a
-                      href={`mailto:${CONTACT_EMAIL}?subject=Portfolio%20Inquiry&body=Hi%20Ahmad%2C%0A%0AI%20would%20like%20to%20discuss%20a%20project.`}
-                    >
+                    <a href={buildMailtoHref(formData.name, formData.message)}>
                       Send via Email Instead
                     </a>
                   </Button>

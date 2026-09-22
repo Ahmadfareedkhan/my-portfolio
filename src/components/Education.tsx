@@ -14,20 +14,20 @@ const Education = () => {
   
   const certifications = [
     {
-      name: "DeepLearning Specialization",
-      issuer: "Coursera, DeepLearning.ai, Stanford Online",
+      name: "Deep Learning Specialization",
+      issuer: "DeepLearning.AI on Coursera",
       year: "2025",
       icon: <Award className="h-6 w-6" />
     },
     {
       name: "Machine Learning Specialization",
-      issuer: "Coursera, DeepLearning.ai, Stanford Online",
+      issuer: "Stanford Online & DeepLearning.AI on Coursera",
       year: "2024",
       icon: <Award className="h-6 w-6" />
     },
     {
-      name: "Introduction to Generative AI by Google",
-      issuer: "Google",
+      name: "Introduction to Generative AI",
+      issuer: "Google Cloud",
       year: "2024",
       icon: <Award className="h-6 w-6" />
     }

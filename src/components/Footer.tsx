@@ -4,9 +4,6 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  };
   
   return (
     <footer className="py-10 border-t">
@@ -22,10 +19,10 @@ const Footer = () => {
           <div className="flex items-center gap-3 flex-wrap justify-center">
             <Button
               variant="secondary"
+              asChild
               className="bg-tech-teal/90 hover:bg-tech-teal text-white"
-              onClick={scrollToContact}
             >
-              Start Project
+              <a href="#contact">Start Project</a>
             </Button>
             <Button variant="ghost" size="icon" asChild>
               <a 

@@ -1,79 +1,62 @@
-# Welcome to your Lovable project
+# Ahmad Fareed Khan — Portfolio
 
-## Project info
+Personal portfolio site for AI/ML engineering work: production LLM applications,
+workflow automation, data pipelines, and computer vision.
 
-**URL**: https://lovable.dev/projects/c5fc93ae-1ede-40f4-83ac-6b947550053b
+Live site: https://ahmadfareedkhan.tech
 
-## AI context memory
+## Stack
 
-To preserve context across AI sessions, see:
+- **Vite** + **React 18** + **TypeScript**
+- **Tailwind CSS** with **shadcn/ui** (Radix primitives)
+- **next-themes** for light/dark mode
+- Contact delivery via [FormSubmit](https://formsubmit.co) AJAX endpoint, with a `mailto:` fallback
 
-- `docs/AI_CONTEXT.md`
+## Local development
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/c5fc93ae-1ede-40f4-83ac-6b947550053b) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Requires Node.js 18+ and npm.
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+npm install
+npm run dev        # dev server on http://localhost:8080
 ```
 
-**Edit a file directly in GitHub**
+## Scripts
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Start the Vite dev server |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | ESLint over `src/` |
+| `npm run typecheck` | TypeScript check (`vite build` does **not** typecheck) |
 
-**Use GitHub Codespaces**
+Run `npm run lint && npm run typecheck && npm run build` before deploying.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Configuration
 
-## What technologies are used for this project?
+Contact form delivery defaults to FormSubmit using the address in
+`src/components/Contact.tsx`. To route submissions elsewhere, copy
+`.env.example` to `.env` and set:
 
-This project is built with:
+```
+VITE_CONTACT_FORM_ENDPOINT=https://your-endpoint.example/submit
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The endpoint must accept a JSON `POST` and return JSON.
 
-## How can I deploy this project?
+## Content
 
-Simply open [Lovable](https://lovable.dev/projects/c5fc93ae-1ede-40f4-83ac-6b947550053b) and click on Share -> Publish.
+Site content is colocated with the components that render it — there is no CMS:
 
-## Can I connect a custom domain to my Lovable project?
+- `src/components/Hero.tsx` — positioning, headline stats, service blocks
+- `src/components/Experience.tsx` — roles, in challenge → build → impact form
+- `src/components/Projects.tsx` — project/case-study cards
+- `src/components/Skills.tsx` — capability groups and proficiency labels
+- `src/components/Education.tsx` — degree and certifications
 
-Yes it is!
+## Deployment
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Static build; any static host works. `public/_redirects` contains the SPA
+rewrite rule for Netlify (`/* /index.html 200`). On other hosts, configure the
+equivalent history fallback so client-side routes resolve.

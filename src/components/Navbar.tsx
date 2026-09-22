@@ -1,9 +1,33 @@
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Brain, Code, FileText, Github, GraduationCap, Home, Linkedin, Mail, Menu, User } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+
+const CONTACT_EMAIL = "ahmadkhanfareed388@gmail.com";
+const GITHUB_URL = "https://github.com/Ahmadfareedkhan";
+const LINKEDIN_URL = "https://www.linkedin.com/in/ahmad-ml-engineer-ai-expert";
+
+// Real hrefs rather than scrollIntoView handlers: sections become deep-linkable
+// (you can send a client straight to /#projects), crawlable as internal links,
+// and keyboard/middle-click behave like normal links. Smooth scrolling still
+// happens via `html { scroll-behavior: smooth }`, which the reduced-motion
+// media query in index.css disables for users who ask for that.
+const navItems = [
+  { name: "Home", href: "#home", icon: <Home size={18} /> },
+  { name: "Experience", href: "#experience", icon: <Code size={18} /> },
+  { name: "Projects", href: "#projects", icon: <Brain size={18} /> },
+  { name: "Skills", href: "#skills", icon: <FileText size={18} /> },
+  { name: "Education", href: "#education", icon: <GraduationCap size={18} /> },
+  { name: "Contact", href: "#contact", icon: <User size={18} /> }
+];
+
+const socialLinks = [
+  { label: "GitHub", href: GITHUB_URL, icon: <Github size={20} />, external: true },
+  { label: "LinkedIn", href: LINKEDIN_URL, icon: <Linkedin size={20} />, external: true },
+  { label: "Email", href: `mailto:${CONTACT_EMAIL}`, icon: <Mail size={20} />, external: false }
+];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,29 +35,13 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const navItems = [
-    { name: "Home", icon: <Home size={18} />, action: () => window.scrollTo(0, 0) },
-    { name: "Experience", icon: <Code size={18} />, action: () => scrollToSection("experience") },
-    { name: "Projects", icon: <Brain size={18} />, action: () => scrollToSection("projects") },
-    { name: "Skills", icon: <FileText size={18} />, action: () => scrollToSection("skills") },
-    { name: "Education", icon: <GraduationCap size={18} />, action: () => scrollToSection("education") },
-    { name: "Contact", icon: <User size={18} />, action: () => scrollToSection("contact") }
-  ];
 
   return (
     <header
@@ -43,20 +51,15 @@ const Navbar = () => {
         }`}
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="text-2xl font-bold gradient-text">
+        <a href="#home" className="text-2xl font-bold gradient-text">
           Ahmad Khan
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-1">
+        <nav className="hidden md:flex items-center space-x-1" aria-label="Main">
           {navItems.map((item) => (
-            <Button
-              key={item.name}
-              variant="ghost"
-              onClick={item.action}
-              className="text-sm font-medium"
-            >
-              {item.name}
+            <Button key={item.name} variant="ghost" asChild className="text-sm font-medium">
+              <a href={item.href}>{item.name}</a>
             </Button>
           ))}
         </nav>
@@ -65,39 +68,22 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-2">
           <Button
             variant="secondary"
-            onClick={() => scrollToSection("contact")}
+            asChild
             className="bg-tech-teal/90 hover:bg-tech-teal text-white"
           >
-            Start Project
+            <a href="#contact">Start Project</a>
           </Button>
-          <Button variant="ghost" size="icon" asChild>
-            <a
-              href="https://github.com/Ahmadfareedkhan"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-            >
-              <Github size={20} />
-            </a>
-          </Button>
-          <Button variant="ghost" size="icon" asChild>
-            <a
-              href="https://www.linkedin.com/in/ahmad-ml-engineer-ai-expert"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={20} />
-            </a>
-          </Button>
-          <Button variant="ghost" size="icon" asChild>
-            <a
-              href="mailto:ahmadkhanfareed388@gmail.com"
-              aria-label="Email"
-            >
-              <Mail size={20} />
-            </a>
-          </Button>
+          {socialLinks.map((social) => (
+            <Button key={social.label} variant="ghost" size="icon" asChild>
+              <a
+                href={social.href}
+                aria-label={social.label}
+                {...(social.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {social.icon}
+              </a>
+            </Button>
+          ))}
           <ThemeToggle />
         </div>
 
@@ -106,53 +92,53 @@ const Navbar = () => {
           <ThemeToggle />
           <Sheet open={isMobileOpen} onOpenChange={setIsMobileOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" aria-label="Open menu">
                 <Menu />
               </Button>
             </SheetTrigger>
             <SheetContent>
-              <nav className="flex flex-col space-y-4 mt-6">
+              {/* Radix requires both a title and a description on dialog content;
+                  without them screen readers announce an unnamed dialog. */}
+              <SheetTitle className="sr-only">Site navigation</SheetTitle>
+              <SheetDescription className="sr-only">
+                Jump to a section of the page, or open a social or email link.
+              </SheetDescription>
+              <nav className="flex flex-col space-y-4 mt-6" aria-label="Mobile">
                 {navItems.map((item) => (
                   <Button
                     key={item.name}
                     variant="ghost"
-                    onClick={() => {
-                      item.action();
-                      setIsMobileOpen(false);
-                    }}
+                    asChild
                     className="justify-start gap-2"
+                    onClick={() => setIsMobileOpen(false)}
                   >
-                    {item.icon}
-                    {item.name}
+                    <a href={item.href}>
+                      {item.icon}
+                      {item.name}
+                    </a>
                   </Button>
                 ))}
 
                 <Button
                   className="mt-2 bg-tech-teal hover:bg-tech-teal/90"
-                  onClick={() => {
-                    scrollToSection("contact");
-                    setIsMobileOpen(false);
-                  }}
+                  asChild
+                  onClick={() => setIsMobileOpen(false)}
                 >
-                  Start Project
+                  <a href="#contact">Start Project</a>
                 </Button>
 
                 <div className="pt-4 mt-4 border-t flex gap-2">
-                  <Button variant="outline" size="icon" asChild>
-                    <a href="https://github.com/Ahmadfareedkhan" target="_blank" rel="noopener noreferrer">
-                      <Github size={20} />
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="icon" asChild>
-                    <a href="https://www.linkedin.com/in/ahmad-ml-engineer-ai-expert" target="_blank" rel="noopener noreferrer">
-                      <Linkedin size={20} />
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="icon" asChild>
-                    <a href="mailto:ahmadkhanfareed388@gmail.com">
-                      <Mail size={20} />
-                    </a>
-                  </Button>
+                  {socialLinks.map((social) => (
+                    <Button key={social.label} variant="outline" size="icon" asChild>
+                      <a
+                        href={social.href}
+                        aria-label={social.label}
+                        {...(social.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      >
+                        {social.icon}
+                      </a>
+                    </Button>
+                  ))}
                 </div>
               </nav>
             </SheetContent>
@@ -164,4 +150,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

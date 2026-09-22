@@ -82,8 +82,10 @@ const Projects = () => {
         "Developed Streamlit dashboards with Plotly for quick operational insights.",
         "Automated scheduling and data quality checks for reliable recurring runs."
       ],
-      link: "https://github.com/TauricResearch/TradingAgents",
-      linkType: "github"
+      // Link intentionally omitted: the previous URL pointed at
+      // TauricResearch/TradingAgents, a third-party repository, not this work.
+      // Add your own repo or demo URL here when available.
+      type: "Personal Project"
     },
     {
       title: "Thumbly",

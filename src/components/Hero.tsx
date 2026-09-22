@@ -1,18 +1,15 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Sparkles } from "lucide-react";
+import { ArrowDown, Github, Linkedin } from "lucide-react";
+
+// TODO(sal): add your Upwork profile URL here and uncomment the CTA below.
+// The site's stated goal is Upwork conversion, but there is currently no path
+// from here to your marketplace profile and its reviews.
+// const UPWORK_URL = "https://www.upwork.com/freelancers/~YOUR_ID";
 
 const Hero = () => {
-  const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const scrollToProjects = () => {
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <section className="min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12">
+    <section id="home" className="min-h-[calc(100vh-4rem)] flex flex-col justify-center py-12">
       <div className="flex flex-col md:flex-row gap-10 items-center md:items-start animate-fade-in">
         <div className="order-2 md:order-1 md:flex-1">
           <p className="text-tech-teal font-medium mb-3">Hello, I'm</p>
@@ -62,12 +59,17 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-wrap gap-3 mb-12">
-            <Button onClick={scrollToContact} className="bg-tech-blue hover:bg-tech-blue/90">
-              Start a Project
+            <Button asChild className="bg-tech-blue hover:bg-tech-blue/90 text-white">
+              <a href="#contact">Start a Project</a>
             </Button>
-            <Button variant="secondary" onClick={scrollToProjects} className="bg-tech-teal/90 hover:bg-tech-teal text-white">
-              View Case Studies
+            <Button variant="secondary" asChild className="bg-tech-teal/90 hover:bg-tech-teal text-white">
+              <a href="#projects">View Case Studies</a>
             </Button>
+            {/* <Button variant="outline" className="gap-2" asChild>
+              <a href={UPWORK_URL} target="_blank" rel="noopener noreferrer">
+                Hire me on Upwork
+              </a>
+            </Button> */}
             <Button variant="outline" className="gap-2" asChild>
               <a href="https://github.com/Ahmadfareedkhan" target="_blank" rel="noopener noreferrer">
                 <Github size={18} /> GitHub
@@ -85,8 +87,12 @@ const Hero = () => {
           <div className="relative">
             <div className="w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-full border-4 border-tech-teal shadow-xl">
               <img
-                src="/lovable-uploads/profile.jpeg"
+                src="/lovable-uploads/profile-640.jpg"
                 alt="Ahmad Fareed Khan"
+                width={640}
+                height={853}
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-full object-cover object-top"
               />
             </div>
@@ -96,13 +102,10 @@ const Hero = () => {
       </div>
 
       <div className="mt-auto flex justify-center">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" })}
-          className="animate-bounce"
-        >
-          <ArrowDown />
+        <Button variant="ghost" size="icon" asChild className="animate-bounce">
+          <a href="#experience" aria-label="Scroll to experience">
+            <ArrowDown />
+          </a>
         </Button>
       </div>
     </section>

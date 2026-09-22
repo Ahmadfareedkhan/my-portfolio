@@ -1,5 +1,6 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Fonts are loaded via preconnect + <link rel="stylesheet"> in index.html.
+   Do not reintroduce an @import here: it blocks font discovery until this
+   stylesheet has been downloaded and parsed. */
 
 @tailwind base;
 @tailwind components;
@@ -100,6 +101,27 @@
 
   html {
     scroll-behavior: smooth;
+  }
+
+  /* The fixed navbar is ~72px tall; without this, scrolling to a section
+     leaves its heading tucked behind the blurred header. */
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 

@@ -106,8 +106,11 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.5s ease-out',
-				'slide-in': 'slide-in 0.5s ease-out'
+				// 'both' fill-mode is required: with animation-delay and the default
+				// fill-mode of 'none', the element renders fully visible during the
+				// delay, then snaps to opacity 0 before fading in.
+				'fade-in': 'fade-in 0.5s ease-out both',
+				'slide-in': 'slide-in 0.5s ease-out both'
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
