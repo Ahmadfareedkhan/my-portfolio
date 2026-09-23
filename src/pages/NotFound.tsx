@@ -1,6 +1,7 @@
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { useLocation } from "react-router-dom";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const NotFound = () => {
   const location = useLocation();
@@ -13,26 +14,35 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-6">
-      <div className="text-center">
-        <p className="text-sm font-medium text-tech-teal mb-2">404</p>
-        <h1 className="text-3xl md:text-4xl font-bold mb-3">Page not found</h1>
-        <p className="text-muted-foreground mb-8 max-w-md">
-          That page doesn't exist. Everything lives on the main page — jump back
-          in below.
-        </p>
-        <div className="flex flex-wrap gap-3 justify-center">
-          <Button asChild className="bg-tech-blue hover:bg-tech-blue/90 text-white">
-            <a href="/">Back to home</a>
-          </Button>
-          <Button variant="outline" asChild>
-            <a href="/#projects">View projects</a>
-          </Button>
-          <Button variant="outline" asChild>
-            <a href="/#contact">Get in touch</a>
-          </Button>
+    <div className="flex min-h-screen flex-col">
+      <SiteHeader />
+      <main className="flex flex-1 items-center">
+        <div className="shell py-32">
+          <p className="label">Error 404</p>
+          <h1 className="mt-8 max-w-[16ch] text-display font-medium">Page not found.</h1>
+          <p className="mt-8 max-w-measure text-lead text-muted-foreground">
+            That page does not exist. The work and every case study are linked from the home page.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <a
+              href="/"
+              className="group inline-flex items-baseline gap-2 text-[1.0625rem] font-medium text-primary"
+            >
+              Back to home
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                &rarr;
+              </span>
+            </a>
+            <a href="/#work" className="link-underline text-[1.0625rem] text-muted-foreground">
+              See the work
+            </a>
+            <a href="/#contact" className="link-underline text-[1.0625rem] text-muted-foreground">
+              Get in touch
+            </a>
+          </div>
         </div>
-      </div>
+      </main>
+      <SiteFooter />
     </div>
   );
 };

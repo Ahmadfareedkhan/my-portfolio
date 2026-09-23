@@ -1,0 +1,34 @@
+/**
+ * Every route the site serves, in one place.
+ *
+ * Imported by the audit, the sitemap generator and the prerenderer, so a new
+ * page cannot end up checked but unlisted (or listed but unchecked).
+ *
+ * `npm run audit` cross-checks this against the case studies defined in
+ * src/data/projects.ts and fails if they disagree, which is what stops this
+ * drifting when a project is added.
+ */
+
+export const SITE_URL = "https://ahmadfareedkhan.tech";
+
+export const ROUTES = [
+  { path: "/", priority: "1.0", changefreq: "monthly" },
+  { path: "/work/jadoc-v3", priority: "0.8", changefreq: "yearly" },
+  { path: "/work/conversation-analysis", priority: "0.8", changefreq: "yearly" },
+  { path: "/work/procurement-intelligence", priority: "0.8", changefreq: "yearly" },
+  { path: "/work/plan-takeoff", priority: "0.8", changefreq: "yearly" },
+  { path: "/work/tariff-classification", priority: "0.8", changefreq: "yearly" },
+  { path: "/work/voice-companion", priority: "0.8", changefreq: "yearly" }
+];
+
+export const paths = () => ROUTES.map((r) => r.path);
+
+/**
+ * Where a route's prerendered HTML lives, relative to dist/.
+ *
+ * "/work/<slug>" is written as work/<slug>.html, not work/<slug>/index.html.
+ * Netlify serves both at /work/<slug>, but a directory index gets a 301 to
+ * /work/<slug>/ - so every link, the sitemap and each page's own canonical URL
+ * would point at a redirect. A flat .html file is served with a plain 200.
+ */
+export const fileFor = (route) => (route === "/" ? "index.html" : `${route.slice(1)}.html`);

@@ -7,84 +7,73 @@
 @tailwind utilities;
 
 @layer base {
+  /* Warm neutrals, not blue-greys. The cold navy/teal pairing is the default
+     of every generated tech template; warm paper + ink reads as editorial.
+     One accent only, used sparingly - numbers, hovers, a single rule. */
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 40 24% 98%;
+    --foreground: 30 10% 8%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --rule: 34 12% 86%;
+
+    --card: 40 24% 98%;
+    --card-foreground: 30 10% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 30 10% 8%;
 
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 9 72% 48%;
+    --primary-foreground: 40 24% 98%;
 
-    --secondary: 167 94% 45%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 36 14% 93%;
+    --secondary-foreground: 30 10% 8%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 36 14% 93%;
+    --muted-foreground: 33 7% 42%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 36 14% 93%;
+    --accent-foreground: 30 10% 8%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 40 24% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --border: 34 12% 86%;
+    --input: 34 12% 80%;
+    --ring: 9 72% 48%;
 
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0.25rem;
   }
 
   .dark {
-    --background: 224 54% 8%;
-    --foreground: 210 40% 98%;
+    --background: 30 8% 5%;
+    --foreground: 40 16% 92%;
 
-    --card: 224 50% 11%;
-    --card-foreground: 210 40% 98%;
+    --rule: 33 7% 17%;
 
-    --popover: 224 50% 11%;
-    --popover-foreground: 210 40% 98%;
+    --card: 30 8% 5%;
+    --card-foreground: 40 16% 92%;
 
-    --primary: 217.2 91.2% 62%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --popover: 30 8% 8%;
+    --popover-foreground: 40 16% 92%;
 
-    --secondary: 178 82% 38%;
-    --secondary-foreground: 210 40% 98%;
+    --primary: 11 92% 60%;
+    --primary-foreground: 30 8% 5%;
 
-    --muted: 221 31% 18%;
-    --muted-foreground: 215 18% 74%;
+    --secondary: 30 6% 12%;
+    --secondary-foreground: 40 16% 92%;
 
-    --accent: 221 31% 18%;
-    --accent-foreground: 210 40% 98%;
+    --muted: 30 6% 12%;
+    --muted-foreground: 38 8% 60%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: 30 6% 12%;
+    --accent-foreground: 40 16% 92%;
 
-    --border: 217 32% 24%;
-    --input: 217 32% 24%;
-    --ring: 178 82% 38%;
-    
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --destructive: 0 62% 47%;
+    --destructive-foreground: 40 16% 92%;
+
+    --border: 33 7% 17%;
+    --input: 33 7% 22%;
+    --ring: 11 92% 60%;
   }
 }
 
@@ -94,19 +83,36 @@
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    @apply antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01" 1, "cv01" 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Tabular figures everywhere numbers carry meaning, so metrics align in
+     columns and do not jitter between rows. */
+  .tabular,
+  table,
+  time {
+    font-variant-numeric: tabular-nums;
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  /* The fixed navbar is ~72px tall; without this, scrolling to a section
-     leaves its heading tucked behind the blurred header. */
   section[id] {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 5rem;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  /* Focus is visible and on-brand rather than the browser default. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 3px;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -126,21 +132,44 @@
 }
 
 @layer components {
-  .gradient-text {
-    @apply bg-gradient-to-r from-tech-blue to-tech-teal bg-clip-text text-transparent;
+  /* The page shell: wide outer bound, generous gutters. Display type is allowed
+     to reach the gutters; body copy is constrained by max-w-measure instead. */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-6 md:px-10 lg:px-16;
   }
-  
-  .section-heading {
-    @apply text-3xl md:text-4xl font-bold mb-5 gradient-text tracking-tight;
+
+  /* Small mono label used for section names, metadata and eyebrows. This plus
+     the type scale does the work that borders and cards used to do. */
+  .label {
+    @apply font-mono text-label uppercase text-muted-foreground;
   }
-  
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-border/80;
+
+  /* Hairline. The only structural device in the layout. */
+  .rule {
+    @apply border-t border-rule;
   }
-  
-  .timeline-dot::before {
-    content: '';
-    @apply absolute w-4 h-4 bg-tech-teal rounded-full -left-[22px] top-1;
+
+  /* Section header: label on the left, count/meta on the right, hairline under. */
+  .section-head {
+    @apply flex items-baseline justify-between gap-6 pb-5 rule border-t-0 border-b;
   }
-  
+
+  /* Crisp edge, deliberately. The page's visual language is precise
+     (hairlines, tabular figures, tight tracking); a feathered photo edge reads
+     as a filter effect and fights it. The studio grey is handled by cropping
+     tighter and grading warm instead of by hiding the edge.
+
+     The theme-specific filter only closes the gap between the studio grey and
+     the page tone; the image itself is identical in both. */
+  .portrait {
+    filter: contrast(1.03);
+  }
+
+  .dark .portrait {
+    filter: brightness(0.8) contrast(1.12);
+  }
+
+  .link-underline {
+    @apply underline decoration-rule underline-offset-4 transition-colors hover:decoration-primary hover:text-primary;
+  }
 }
