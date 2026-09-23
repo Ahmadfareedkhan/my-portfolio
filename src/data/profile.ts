@@ -11,6 +11,8 @@ export const profile = {
   phoneHref: "tel:+923320702124",
   github: "https://github.com/Ahmadfareedkhan",
   linkedin: "https://www.linkedin.com/in/ahmad-ml-engineer-ai-expert",
+  // Share-link tracking parameter (?mp_source=share) removed.
+  upwork: "https://www.upwork.com/freelancers/~01473790b5b739a14d",
   available: true,
   // Owner's stated figure. The listed roles start in 2023, so this is
   // surfaced next to the role list rather than as a standalone hero claim -
@@ -92,7 +94,7 @@ export const offerings: Offering[] = [
     area: "Agentic workflows",
     value: "50%",
     unit: "less manual effort",
-    text: "An agent proposes customs tariff codes with its reasoning, so specialists review instead of starting from scratch.",
+    text: "For PwC: an agent proposes customs tariff codes with its reasoning, so specialists review instead of starting from scratch.",
     slug: "tariff-classification"
   },
   {
@@ -126,8 +128,8 @@ export const offerings: Offering[] = [
   {
     area: "Data at scale",
     value: "4×",
-    unit: "cheaper per full run, projected",
-    text: "Built to sort 600 million job ads into standard occupations; a full run's projected cost fell from $48K to $12K.",
+    unit: "cheaper per full run",
+    text: "Sorted 600 million job ads into standard occupations for Pearson; the cost of a full run fell from $48K to $12K.",
     slug: "jadoc-v3"
   }
 ];

@@ -41,6 +41,17 @@ export function Intro() {
             <a href="#work" className="link-underline text-[1.0625rem] text-muted-foreground">
               See the work
             </a>
+            {/* Most visitors arrive from Upwork or would rather contract through
+                it, so hiring there is offered next to the direct route. */}
+            <a
+              href={profile.upwork}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline text-[1.0625rem] text-muted-foreground"
+            >
+              Hire me on Upwork
+              <span aria-hidden="true"> &#8599;</span>
+            </a>
             {profile.available && (
               <span className="label flex items-center gap-2">
                 <span className="relative flex h-1.5 w-1.5">

@@ -17,6 +17,8 @@
  * - CLIENT ANONYMITY: no client or employer names, no internal URLs, no
  *   contract values, no named individuals. Several of these were delivered
  *   under NDA or as employer work. Describe the industry, never the company.
+ *   Exception: Pearson and PwC (the TenX engagements) are named, with the
+ *   owner's approval (2026-09-23). Every other client stays anonymous.
  * - Metrics must be real and defensible in a client call. Leave `metrics`
  *   empty rather than inventing a number, and never state an accuracy figure
  *   that has not been measured against a ground truth.
@@ -57,7 +59,8 @@ export type CaseStudy = {
 export type Project = {
   slug: string;
   title: string;
-  /** Anonymised. Industry and engagement type, never a company name. */
+  /** Industry and engagement type, not a company name - except the approved
+   *  named clients listed in the writing rules above. */
   client?: string;
   year: string;
   summary: string;
@@ -73,17 +76,17 @@ export const projects: Project[] = [
   {
     slug: "jadoc-v3",
     title: "Job Ad Classification at Scale",
-    client: "Global education group, via agency",
+    client: "Pearson, via TenX",
     year: "2026",
     summary:
       "Six hundred million job adverts, sorted into standard occupations. The first working version would have cost $48,000 every time it ran.",
     metrics: [
-      // Cost and runtime are projections for a full run; production validation
-      // was 20.9M records. Label them that way, as the study text does.
-      { value: "600M", label: "job ads in scope" },
+      // The full 600M run was completed (confirmed by the owner, 2026-09-23).
+      // The "from" figures are what the first version would have taken.
+      { value: "600M", label: "job ads processed" },
       { value: "65.13%", from: "12.48%", label: "top-1 accuracy" },
-      { value: "$12K", from: "$48K", label: "projected cost per full run" },
-      { value: "4.7 days", from: "23 days", label: "projected full-run time" }
+      { value: "$12K", from: "$48K", label: "compute cost per full run" },
+      { value: "4.7 days", from: "23 days", label: "full-corpus runtime" }
     ],
     stack: ["Databricks", "PySpark", "SageMaker", "MLflow", "FAISS", "FP16"],
     featured: true,
@@ -113,8 +116,8 @@ export const projects: Project[] = [
           heading: "The outcome",
           body: [
             "Top-1 accuracy went from 12.48% to 65.13%; end-to-end pipeline accuracy from 10.47% to 62.24%.",
-            "The projected cost of a full 600M run fell from roughly $48,000 to roughly $12,000, and runtime from about 23 days to about 4.7 days.",
-            "Validated in production on 20.9 million records in around 12 hours."
+            "The cost of a full 600M run fell from a projected $48,000 to roughly $12,000, and runtime from about 23 days to about 4.7 days.",
+            "Validated in production on 20.9 million records in around 12 hours, then run across the full corpus of 600 million adverts."
           ]
         }
       ],
@@ -281,7 +284,7 @@ export const projects: Project[] = [
   {
     slug: "tariff-classification",
     title: "Automated Tariff Classification",
-    client: "Professional services firm, via agency",
+    client: "PwC, via TenX",
     year: "2026",
     summary:
       "Classifying goods for customs was manual, slow, and impossible to staff at the rate the work arrived.",

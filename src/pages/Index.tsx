@@ -17,7 +17,7 @@ const HOME_JSONLD = {
     jobTitle: "AI & Machine Learning Engineer",
     url: SITE_URL,
     email: `mailto:${profile.email}`,
-    sameAs: [profile.github, profile.linkedin],
+    sameAs: [profile.upwork, profile.github, profile.linkedin],
     knowsAbout: [
       "Large Language Models",
       "Agentic workflows",

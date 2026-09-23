@@ -13,7 +13,15 @@ export function SiteFooter() {
           </p>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <a
+            href={profile.upwork}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="label transition-colors hover:text-foreground"
+          >
+            Upwork
+          </a>
           <a
             href={profile.github}
             target="_blank"

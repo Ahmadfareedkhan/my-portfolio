@@ -135,6 +135,19 @@ export function ContactSection() {
                 </dd>
               </div>
               <div className="flex gap-6">
+                <dt className="label w-16 shrink-0 pt-1">Upwork</dt>
+                <dd>
+                  <a
+                    href={profile.upwork}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-underline text-[0.9375rem]"
+                  >
+                    Hire me on Upwork
+                  </a>
+                </dd>
+              </div>
+              <div className="flex gap-6">
                 <dt className="label w-16 shrink-0 pt-1">Online</dt>
                 <dd className="flex gap-5">
                   <a
