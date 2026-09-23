@@ -36,3 +36,6 @@ dist-ssr
 
 # TypeScript incremental build info (written by `npm run typecheck`)
 *.tsbuildinfo
+
+# Headless Chrome downloaded by scripts/netlify-build.sh
+.cache/

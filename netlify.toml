@@ -1,0 +1,10 @@
+# Overrides the build settings in the Netlify UI.
+
+[build]
+  # Downloads headless Chrome for the prerender step, then runs `npm run build`.
+  command = "bash scripts/netlify-build.sh"
+  publish = "dist"
+
+[build.environment]
+  # scripts/prerender.mjs uses Node's built-in WebSocket client (Node 22+).
+  NODE_VERSION = "22"

@@ -52,11 +52,19 @@ const CHROME = {
   linux: ["/usr/bin/google-chrome", "/usr/bin/chromium", "/usr/bin/chromium-browser"]
 };
 
-const chromePath = (CHROME[platform] ?? CHROME.linux).find(existsSync);
+// CHROME_PATH wins: CI images (Netlify included) ship no system Chrome, so
+// scripts/netlify-build.sh downloads one and passes its path in.
+const chromePath = [process.env.CHROME_PATH, ...(CHROME[platform] ?? CHROME.linux)]
+  .filter(Boolean)
+  .find(existsSync);
 if (!chromePath) {
-  console.error(`No Chrome/Edge found for platform "${platform}".`);
+  console.error(`No Chrome/Edge found for platform "${platform}". Set CHROME_PATH to one.`);
   process.exit(1);
 }
+
+// Build containers usually run without the kernel features Chrome's sandbox
+// needs, and with a /dev/shm too small for it. Only relaxed under CI.
+const IN_CI = Boolean(process.env.CI || process.env.NETLIFY);
 
 async function waitFor(url, attempts = 40) {
   for (let i = 0; i < attempts; i++) {
@@ -83,7 +91,8 @@ const chrome = spawn(
     `--user-data-dir=${process.cwd()}/.audit/prerender-chrome`,
     "--no-first-run",
     "--no-default-browser-check",
-    "--disable-gpu"
+    "--disable-gpu",
+    ...(IN_CI ? ["--no-sandbox", "--disable-dev-shm-usage"] : [])
   ],
   { stdio: "ignore" }
 );
