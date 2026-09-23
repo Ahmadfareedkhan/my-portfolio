@@ -131,18 +131,24 @@ export const projects: Project[] = [
     client: "Child psychologist, private contract",
     year: "2026",
     summary:
-      "A parent records a difficult conversation with their teenager and gets back what actually happened, why it mattered, and one thing to try next.",
+      "A parent records a difficult conversation with their teenager and gets back what actually happened, why it mattered, and one evidence-based technique to try next.",
+    // From the project's knowledge library (tools.json, concepts.json) and the
+    // quality gate. The library was built to the psychologist's specification
+    // but its clinical wording is not yet reviewed by her - never call it
+    // "psychologist-approved".
     metrics: [
-      { value: "1 hour", label: "recordings supported" },
-      { value: "68", label: "automated tests" }
+      { value: "50", label: "evidence-based parent techniques" },
+      { value: "19", label: "psychology concepts, each cited" },
+      { value: "12", label: "quality questions every report must pass" },
+      { value: "1 hour", label: "recordings supported" }
     ],
     stack: ["Next.js", "FastAPI", "OpenAI", "Speaker diarisation", "AWS", "CI/CD"],
     featured: true,
     study: {
       plain:
-        "A psychologist wanted parents to understand their own conversations with their teenagers. You record a conversation; the app separates who said what, finds the moments that mattered, and suggests one thing to try — always quoting the actual recording.",
+        "A psychologist wanted parents to understand their own conversations with their teenagers. You record a conversation; the app separates who said what, finds the moments that mattered, and suggests one evidence-based technique to try — always quoting the actual recording.",
       metaDescription:
-        "An app that records a parent-teen conversation, separates who said what, and returns feedback grounded in the actual recording rather than generic advice.",
+        "An app that turns a recorded parent-teen conversation into feedback that quotes the recording and draws only on evidence-based CBT, DBT and family techniques.",
       role: "Sole engineer, design through deployment",
       sections: [
         {
@@ -161,6 +167,14 @@ export const projects: Project[] = [
           ]
         },
         {
+          heading: "Grounded in real psychology, not AI opinion",
+          body: [
+            "The app is not allowed to invent advice. Every suggestion comes from a library of 50 parent techniques, built to the psychologist's specification and drawn from CBT, DBT, parent management training, motivational interviewing, and family repair and de-escalation work. Each records when to use it, when not to, and how strong the evidence behind it is.",
+            "When the app names what happened in a conversation, it uses one of 19 psychology concepts, each credited to where it comes from: cognitive distortions from CBT (Beck and Burns), DBT (Linehan), Gottman's family interaction research, Patterson's and Kazdin's parent training, self-determination theory and Tronick's attachment research. Their citations are real and checked automatically. Parents see plain language; the clinical labels stay internal.",
+            "The model proposes and the code verifies. Quotes are pulled from the real transcript, never written by the model, and any technique or concept that is not in the library is dropped. Before a parent sees a report, a second, different model reviews it against the psychologist's own 12 quality questions. A report that fails is rewritten, and any section that still fails is removed."
+          ]
+        },
+        {
           heading: "Making long recordings survive the real world",
           body: [
             "Support went from short clips to full hour-long conversations. That broke an assumption nobody had tested: the upload request stayed open for the entire job, and a 42-minute analysis outlived both the browser's patience and the proxy's timeout. The work completed on the server and was saved correctly — but the page reported failure.",
@@ -174,7 +188,7 @@ export const projects: Project[] = [
         caption: "Recording and upload. Up to one hour, processed in the background."
       },
       caveat:
-        "Built for one practitioner under a private contract. Screenshots are from a local build with no recordings loaded — no real conversation data is shown anywhere."
+        "Built for one practitioner under a private contract. The technique library's citations are real and checked; its clinical wording is awaiting the psychologist's review. Screenshots are from a local build with no recordings loaded — no real conversation data is shown anywhere."
     }
   },
 
