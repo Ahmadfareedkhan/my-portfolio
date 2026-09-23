@@ -5,7 +5,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" type="image/png" href="/favicon.png" />
+  <!-- AK monogram in Instrument Sans on the accent vermilion. Modern browsers
+       use the SVG; the .ico covers older ones and the automatic /favicon.ico
+       request, which would otherwise fall through to the SPA catch-all. -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f6" />
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d0c0b" />
@@ -31,7 +35,8 @@
   <meta property="og:image" content="https://ahmadfareedkhan.tech/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Ahmad Fareed Khan, AI & Machine Learning Engineer" />
+  <meta property="og:image:alt"
+    content="Ahmad Fareed Khan, AI Engineer: I build AI systems that hold up in production. Portrait on the right." />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ahmad Fareed Khan - AI & Machine Learning Engineer" />
