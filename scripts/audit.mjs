@@ -23,7 +23,7 @@ import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { platform } from "node:process";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { paths } from "./routes.mjs";
+import { fileFor, paths } from "./routes.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name) => args.some((a) => a === `--${name}`);
@@ -259,7 +259,7 @@ const seoSeen = { titles: new Set(), descriptions: new Set(), canonicals: new Se
 // does not execute JavaScript - which is the whole reason they exist.
 function checkPrerender() {
   for (const route of ROUTES) {
-    const file = route === "/" ? join("dist", "index.html") : join("dist", route, "index.html");
+    const file = join("dist", fileFor(route));
     let html;
     try {
       html = readFileSync(file, "utf8");

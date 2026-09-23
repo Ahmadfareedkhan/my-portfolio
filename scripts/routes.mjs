@@ -22,3 +22,13 @@ export const ROUTES = [
 ];
 
 export const paths = () => ROUTES.map((r) => r.path);
+
+/**
+ * Where a route's prerendered HTML lives, relative to dist/.
+ *
+ * "/work/<slug>" is written as work/<slug>.html, not work/<slug>/index.html.
+ * Netlify serves both at /work/<slug>, but a directory index gets a 301 to
+ * /work/<slug>/ - so every link, the sitemap and each page's own canonical URL
+ * would point at a redirect. A flat .html file is served with a plain 200.
+ */
+export const fileFor = (route) => (route === "/" ? "index.html" : `${route.slice(1)}.html`);

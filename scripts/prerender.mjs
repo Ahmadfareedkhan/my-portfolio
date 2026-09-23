@@ -10,8 +10,9 @@
  *
  * How it works: serve the build, drive a real Chrome over the DevTools
  * Protocol, wait for each route to finish rendering, and write the resulting
- * DOM to dist/<route>/index.html. Static hosts serve those files directly and
- * the SPA fallback only handles genuinely unknown URLs.
+ * DOM to dist/ (see fileFor in routes.mjs for the file names). Static hosts
+ * serve those files directly and the SPA fallback only handles genuinely
+ * unknown URLs.
  *
  * The app still boots normally on top of the static markup, so client routing,
  * the theme toggle and the contact form behave as before.
@@ -21,7 +22,7 @@ import { spawn } from "node:child_process";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { platform } from "node:process";
-import { paths } from "./routes.mjs";
+import { fileFor, paths } from "./routes.mjs";
 
 const PORT = 4178;
 const CDP_PORT = 9377;
@@ -187,7 +188,7 @@ for (const route of routes) {
   await sleep(350);
 
   const html = await evaluate(SERIALISE);
-  const file = route === "/" ? join(OUT, "index.html") : join(OUT, route, "index.html");
+  const file = join(OUT, fileFor(route));
   mkdirSync(dirname(file), { recursive: true });
   writeFileSync(file, html);
 

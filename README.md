@@ -110,8 +110,12 @@ The home page is assembled in `src/pages/Index.tsx` from `Intro`, `Work`,
 
 ```
 dist/index.html
-dist/work/<slug>/index.html
+dist/work/<slug>.html
 ```
+
+Case studies are flat `.html` files rather than `<slug>/index.html` folders:
+Netlify serves both at `/work/<slug>`, but answers a folder with a 301 to
+`/work/<slug>/`, which would put a redirect behind every link and canonical URL.
 
 A client-rendered SPA otherwise serves `<div id="root"></div>` to any crawler
 that does not execute JavaScript, which makes every per-page title, description
