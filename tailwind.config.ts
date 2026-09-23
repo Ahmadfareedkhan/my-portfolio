@@ -12,13 +12,8 @@ export default {
 	],
 	prefix: "",
 	theme: {
-		container: {
-			center: true,
-			padding: '2rem',
-			screens: {
-				'2xl': '1400px'
-			}
-		},
+		// No `container` plugin config: the layout uses explicit gutters so display
+		// type can break out of the text column while body copy stays measured.
 		extend: {
 			colors: {
 				border: 'hsl(var(--border))',
@@ -26,6 +21,8 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				// `rule` is the hairline used for structure instead of card borders.
+				rule: 'hsl(var(--rule))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -53,24 +50,26 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
-				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				},
-				tech: {
-					blue: '#1E3A8A',
-					teal: '#0D9488',
-					lightblue: '#3B82F6',
-					navy: '#0F172A',
-					gray: '#6B7280',
 				}
+			},
+			fontFamily: {
+				sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
+				mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+			},
+			fontSize: {
+				// Editorial scale: a wide range is what creates hierarchy here,
+				// since the design uses almost no borders or fills.
+				'label': ['0.6875rem', { lineHeight: '1', letterSpacing: '0.14em' }],
+				'meta': ['0.8125rem', { lineHeight: '1.4', letterSpacing: '0.02em' }],
+				'body': ['1.0625rem', { lineHeight: '1.65' }],
+				'lead': ['clamp(1.125rem, 1.6vw, 1.375rem)', { lineHeight: '1.5' }],
+				'statement': ['clamp(1.75rem, 3.4vw, 2.75rem)', { lineHeight: '1.18', letterSpacing: '-0.022em' }],
+				'display': ['clamp(2.75rem, 7.2vw, 5.75rem)', { lineHeight: '0.98', letterSpacing: '-0.04em' }],
+				'numeral': ['clamp(2rem, 4.4vw, 3.25rem)', { lineHeight: '1', letterSpacing: '-0.035em' }]
+			},
+			maxWidth: {
+				'measure': '58ch',
+				'shell': '88rem'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -79,45 +78,28 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
 				},
-				'fade-in': {
-					from: { opacity: '0', transform: 'translateY(10px)' },
+				// Deliberately small movement: editorial layouts read as considered,
+				// not animated. 8px, not 40px.
+				'rise': {
+					from: { opacity: '0', transform: 'translateY(8px)' },
 					to: { opacity: '1', transform: 'translateY(0)' }
-				},
-				'slide-in': {
-					from: { opacity: '0', transform: 'translateX(-20px)' },
-					to: { opacity: '1', transform: 'translateX(0)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				// 'both' fill-mode is required: with animation-delay and the default
-				// fill-mode of 'none', the element renders fully visible during the
-				// delay, then snaps to opacity 0 before fading in.
-				'fade-in': 'fade-in 0.5s ease-out both',
-				'slide-in': 'slide-in 0.5s ease-out both'
-			},
-			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				mono: ['JetBrains Mono', 'monospace']
+				// 'both' fill-mode is required wherever animation-delay is used, or
+				// delayed elements render visible during the delay and then flash out.
+				'rise': 'rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both'
 			}
 		}
 	},
 	plugins: [tailwindcssAnimate],
 } satisfies Config;
-

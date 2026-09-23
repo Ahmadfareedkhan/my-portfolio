@@ -1,1 +1,4 @@
-/* /index.html 200
+# Static files win over redirects on Netlify, so the prerendered
+# /work/<slug>/index.html files are served directly and this rule only catches
+# genuinely unknown URLs, handing them to the SPA's 404 route.
+/*  /index.html  200

@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 dist
+.audit
 dist-ssr
 *.local
 
@@ -32,3 +33,6 @@ dist-ssr
 # anchored with a leading slash so nested docs/ folders are still tracked)
 /.cursor/
 /docs/
+
+# TypeScript incremental build info (written by `npm run typecheck`)
+*.tsbuildinfo
