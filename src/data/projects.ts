@@ -373,8 +373,7 @@ export const projects: Project[] = [
       "A voice agent that holds a live sales conversation, retrieves product knowledge mid-sentence, and books the follow-up itself.",
     metrics: [],
     stack: ["LiveKit", "LangGraph", "GPT-4o", "Deepgram", "Cartesia", "Cohere Rerank"],
-    href: "https://voice-assistant-frontend-27bufa.sandbox.livekit.io/",
-    hrefLabel: "Live demo",
+    // The LiveKit sandbox demo returned 410 Gone on 2026-09-23 and was removed.
     featured: false
   },
   {

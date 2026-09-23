@@ -1,14 +1,13 @@
-import { profile } from "@/data/profile";
-import { projects } from "@/data/projects";
-
-const lead = projects[0];
+import { offerings, profile } from "@/data/profile";
+import { getProject } from "@/data/projects";
 
 /**
  * One statement, one supporting paragraph, one row of proof.
  *
- * The proof numbers are attributed to a single engagement on purpose: four
- * real numbers from one project are more credible than four unsourced numbers
- * that imply a career average.
+ * The proof row is organised by the kind of work a client hires for, not by a
+ * single engagement: a buyer looking for an agent or a voice assistant should
+ * see it named before the first scroll. Each column still carries one real
+ * result and links to the project that backs it.
  */
 export function Intro() {
   return (
@@ -77,28 +76,44 @@ export function Intro() {
 
       </div>
 
-      {/* Proof band. Full-bleed hairlines, numbers at display size, no boxes. */}
+      {/* Proof band. Full-bleed hairlines, values at display size, no boxes. */}
       <div className="mt-20 border-y border-rule md:mt-28">
         <div className="shell">
-          <p className="label pt-6">
-            All from one engagement &mdash; {lead.title}, {lead.client}
-          </p>
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-10 py-10 md:grid-cols-4 md:py-12">
-            {lead.metrics.map((m) => (
-              <div key={m.label}>
-                <dt className="sr-only">{m.label}</dt>
-                <dd>
-                  <span className="tabular block text-numeral font-medium">{m.value}</span>
-                  <span className="mt-3 block text-meta text-muted-foreground">{m.label}</span>
-                  {m.from && (
-                    <span className="tabular mt-1 block font-mono text-meta text-muted-foreground">
-                      from {m.from}
-                    </span>
+          <h2 className="label pt-6">What I build</h2>
+          <ul className="grid gap-x-8 gap-y-12 py-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 md:py-12">
+            {offerings.map((o) => {
+              const project = getProject(o.slug);
+              return (
+                <li key={o.area} className="flex flex-col">
+                  <h3 className="label">{o.area}</h3>
+                  <p className="mt-6">
+                    <span className="tabular block text-numeral font-medium">{o.value}</span>
+                    <span className="mt-3 block text-meta text-muted-foreground">{o.unit}</span>
+                  </p>
+                  <p className="mt-5 text-meta text-muted-foreground">{o.text}</p>
+                  {project?.study && (
+                    // Inline, not flex: titles wrap in narrow columns, and a flex
+                    // row pushes the arrow to the far edge instead of after the text.
+                    <a
+                      href={`/work/${project.slug}`}
+                      className="group mt-auto pt-5 text-meta font-medium text-primary"
+                    >
+                      {project.title}
+                      <span className="whitespace-nowrap">
+                        &nbsp;
+                        <span
+                          aria-hidden="true"
+                          className="inline-block transition-transform group-hover:translate-x-1"
+                        >
+                          &rarr;
+                        </span>
+                      </span>
+                    </a>
                   )}
-                </dd>
-              </div>
-            ))}
-          </dl>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </section>
